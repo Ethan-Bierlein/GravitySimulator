@@ -3,11 +3,11 @@
 namespace GravitySimulator
 {
     /// <summary>
-    /// This struct is simply a wrapper for important information associated with a 
+    /// This class is simply a wrapper for important information associated with a 
     /// body and any methods required for modifying that information; all actual 
-    /// simulation is done in the 'System' class.
+    /// simulation is done in the System class.
     /// </summary>
-    public struct SystemBody
+    public class SystemBody
     {
         public string Name { get; set; }
         public double Mass { get; set; }
@@ -21,7 +21,7 @@ namespace GravitySimulator
         private double VZ { get; set; }
 
         /// <summary>
-        /// Constructor for the SystemBody struct.
+        /// Constructor for the SystemBody class.
         /// </summary>
         /// <param name="name">The name of the body.</param>
         /// <param name="mass">The mass of the body.</param>
@@ -65,7 +65,24 @@ namespace GravitySimulator
         {
             this.X += this.VX;
             this.Y += this.VY;
-            this.VZ += this.VZ;
+            this.Z += this.VZ;
+        }
+
+        /// <summary>
+        /// Calculate the distance between the current body and another body.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
+        public double DistanceBetween(SystemBody other)
+        {
+            return 
+                Math.Sqrt(
+                    Math.Pow(this.X - other.X, 2) +
+                    Math.Pow(this.Y - other.Y, 2) +
+                    Math.Pow(this.Z - other.Z, 2)
+                );
         }
     }
 }

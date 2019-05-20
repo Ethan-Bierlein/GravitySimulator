@@ -9,6 +9,6 @@ namespace GravitySimulator
     /// </summary>
     public class System
     {
-
+        public const double G = 0.0000000000667408;
     }
 }
