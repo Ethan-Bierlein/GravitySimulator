@@ -16,14 +16,16 @@ namespace GravitySimulator
         /// </param>
         public static void Main(string[] args)
         {
-            string startStateCSV = File.ReadAllText(args[1]);
-            string endStateCSV = File.ReadAllText(args[2]);
+            string initialStateCSV = File.ReadAllText(args[0]);
+            string idealEndStateCSV = File.ReadAllText(args[1]);
 
-
+            List<SystemBody> initialState = BodyListFromCSV(initialStateCSV);
+            List<SystemBody> idealEndState = BodyListFromCSV(idealEndStateCSV);
         }
 
         /// <summary>
-        /// Generate a list of SystemBody instances from a CSV string.
+        /// Generate a list of SystemBody instances from a CSV string. This method will convert positions and
+        /// velocities from KM and KM/s to M and M/s.
         /// </summary>
         /// <param name="inputCSV">The input CSV string.</param>
         /// <returns>A list of SystemBody instances.</returns>
@@ -34,17 +36,19 @@ namespace GravitySimulator
 
             foreach(string line in lineSplitCSV)
             {
-                string[] commaSplitCSV = line.Split(',');
+                NumberStyles numberStyle = NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent;
+                string[] commaSplitCSV = line.Trim('\n').Trim('\r').Split(',');
+
                 string name = commaSplitCSV[0];
-                double mass = double.Parse(commaSplitCSV[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent);
+                double mass = double.Parse(commaSplitCSV[1], numberStyle);
 
-                double x = double.Parse(commaSplitCSV[2], NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent);
-                double y = double.Parse(commaSplitCSV[3], NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent);
-                double z = double.Parse(commaSplitCSV[4], NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent);
+                double x = double.Parse(commaSplitCSV[2], numberStyle) * 1000;
+                double y = double.Parse(commaSplitCSV[3], numberStyle) * 1000;
+                double z = double.Parse(commaSplitCSV[4], numberStyle) * 1000;
 
-                double vx = double.Parse(commaSplitCSV[5], NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent);
-                double vy = double.Parse(commaSplitCSV[6], NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent);
-                double vz = double.Parse(commaSplitCSV[7], NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent);
+                double vx = double.Parse(commaSplitCSV[5], numberStyle) * 1000;
+                double vy = double.Parse(commaSplitCSV[6], numberStyle) * 1000;
+                double vz = double.Parse(commaSplitCSV[7], numberStyle) * 1000;
 
                 SystemBody systemBody = new SystemBody(name, mass, x, y, z, vx, vy, vz);
                 bodyList.Add(systemBody);

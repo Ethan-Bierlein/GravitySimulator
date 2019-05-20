@@ -71,10 +71,8 @@ namespace GravitySimulator
         /// <summary>
         /// Calculate the distance between the current body and another body.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <returns></returns>
+        /// <param name="other">The other body with which to determine distance.</param>
+        /// <returns>The distance between the two bodies.</returns>
         public double DistanceBetween(SystemBody other)
         {
             return 
@@ -83,6 +81,42 @@ namespace GravitySimulator
                     Math.Pow(this.Y - other.Y, 2) +
                     Math.Pow(this.Z - other.Z, 2)
                 );
+        }
+
+        /// <summary>
+        /// Calculate the distance between the current body and another body with respect to
+        /// the X component of position.
+        /// </summary>
+        /// <param name="other">The other body with which to determine distance.</param>
+        /// <returns>The distance between the two bodies, with respect to the X component.</returns>
+        public double DistanceBetweenX(SystemBody other)
+        {
+            return
+                this.X - other.X;
+        }
+
+        /// <summary>
+        /// Calculate the distance between the current body and another body with respect to
+        /// the Y component of position.
+        /// </summary>
+        /// <param name="other">The other body with which to determine distance.</param>
+        /// <returns>The distance between the two bodies, with respect to the Y component.</returns>
+        public double DistanceBetweenY(SystemBody other)
+        {
+            return
+                this.Y - other.Y;
+        }
+
+        /// <summary>
+        /// Calculate the distance between the current body and another body with respect to
+        /// the Z component of position.
+        /// </summary>
+        /// <param name="other">The other body with which to determine distance.</param>
+        /// <returns>The distance between the two bodies, with respect to the Z component.</returns>
+        public double DistanceBetweenZ(SystemBody other)
+        {
+            return
+                this.Z - other.Z;
         }
     }
 }
