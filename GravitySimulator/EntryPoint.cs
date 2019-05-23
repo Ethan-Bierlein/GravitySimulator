@@ -65,12 +65,12 @@ namespace GravitySimulator
                 double errorVelocity = (errorVX + errorVY + errorVZ) / 3.0;
 
                 double trueError = (errorDisplacement + errorVelocity) / 2.0;
-                csv.Add($"{simulatedBody.Name},{errorDisplacement},{errorVelocity},{trueError}\n");
+                csv.Add($"{simulatedBody.Name},{errorDisplacement},{errorVelocity},{trueError}");
             }
 
             foreach(SystemBody body in simulatedBodies)
             {
-                csv.Add($"{body.Name},{body.X},{body.Y},{body.Z},{body.VX},{body.VY},{body.VZ}\n");
+                csv.Add($"{body.Name},{body.X},{body.Y},{body.Z},{body.VX},{body.VY},{body.VZ}");
             }
 
             File.WriteAllLines($"output_{system.DT}dt.csv", csv.ToArray());
