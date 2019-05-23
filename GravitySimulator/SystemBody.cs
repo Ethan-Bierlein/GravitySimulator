@@ -12,13 +12,13 @@ namespace GravitySimulator
         public string Name { get; set; }
         public double Mass { get; set; }
 
-        private double X { get; set; }
-        private double Y { get; set; }
-        private double Z { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Z { get; set; }
 
-        private double VX { get; set; }
-        private double VY { get; set; }
-        private double VZ { get; set; }
+        public double VX { get; set; }
+        public double VY { get; set; }
+        public double VZ { get; set; }
 
         /// <summary>
         /// Constructor for the SystemBody class.
@@ -46,6 +46,19 @@ namespace GravitySimulator
         }
 
         /// <summary>
+        /// Set the position of the body to a new value.
+        /// </summary>
+        /// <param name="x">The new x position.</param>
+        /// <param name="y">The new y position.</param>
+        /// <param name="z">The new z position.</param>
+        public void SetPosition(double x, double y, double z)
+        {
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
+        }
+
+        /// <summary>
         /// Set the velocity of the body to a new value.
         /// </summary>
         /// <param name="vx">The new x velocity.</param>
@@ -61,11 +74,12 @@ namespace GravitySimulator
         /// <summary>
         /// Integrate the position of the body based on the current velocity.
         /// </summary>
-        public void IntegratePosition()
+        /// <param name="dt">The timestep of the simulation.</param>
+        public void IntegratePosition(double dt)
         {
-            this.X += this.VX;
-            this.Y += this.VY;
-            this.Z += this.VZ;
+            this.X += this.VX * dt;
+            this.Y += this.VY * dt;
+            this.Z += this.VZ * dt;
         }
 
         /// <summary>
